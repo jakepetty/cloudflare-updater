@@ -31,7 +31,7 @@ def get(url):
     Args:
         url: The URL you wish to GET to
     Returns:
-        Jasn object
+        JSON object
     """
     request = urllib2.Request(url)
     request.add_header("Content-Type", "application/json")
@@ -48,7 +48,7 @@ def put(url, data):
         url: The URL you wish to PUT to
         data: The data you wish to PUT
     Returns:
-        Jasn object
+        JSON object
     """
     try:
         # Start CURL Process
@@ -57,7 +57,8 @@ def put(url, data):
         if err:
             print(err.decode())
     except:
-        print "ERROR: Failed to start curl process"
+        print("ERROR: Failed to start curl process")
+        
     return json.loads(out)
 
 
@@ -66,7 +67,7 @@ try:
     # GET IP ADDRESS
     current_ip = getWanIP()
 
-    # Obtain a list of ZONES from cloudflare
+    # Obtain a list of ZONES from Cloudflare
     data = get("https://api.cloudflare.com/client/v4/zones")
 
     # Check if request was successful
@@ -101,10 +102,10 @@ try:
 
                                 # Check if request was successful
                                 if data["success"]:
-                                    print "{} updated".format(record["name"])
+                                    print("{} updated".format(record["name"]))
                                 else:
-                                    print "{} failed".format(record["name"])
+                                    print("{} failed".format(record["name"]))
                             else:
-                                print "{} up-to-date".format(record["name"])
+                                print("{} up-to-date".format(record["name"]))
 except Exception as e:
-    print "An exception occured with cloudflare: " + str(e)
+    print("An exception occurred with cloudflare: " + str(e))
